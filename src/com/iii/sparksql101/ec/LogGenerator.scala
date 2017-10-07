@@ -40,6 +40,7 @@ object LogGenerator extends App {
     val referrer = referers(rand.nextInt(referers.length - 1))
     val page = pages(rand.nextInt(pages.length - 1))
     val visitor = visitors(rand.nextInt(visitors.length - 1))
+
     calendar.setTimeInMillis(timeStartFrom)
     val timestamp = simpleDateFormat.format(calendar.getTime())
     timeStartFrom += rand.nextInt(6000)

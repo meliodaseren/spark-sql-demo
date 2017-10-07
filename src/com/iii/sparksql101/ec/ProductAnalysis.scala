@@ -16,8 +16,7 @@ object ProductAnalysis extends App {
     .appName("ec")
     .getOrCreate()
   val sc = spark.sparkContext
-
-  val sourceFile = "hdfs://quickstart.cloudera/user/cloudera/spark_sql_101/ec/data"
+  val sourceFile = "hdfs://localhost/user/cloudera/spark_sql_101/ec/data"
   val input = sc.textFile(sourceFile)
 
   import spark.implicits._
@@ -48,9 +47,11 @@ object ProductAnalysis extends App {
                                     group by product, substring(timestamp, 0, 13) """).cache()
 
   visitorsByProduct.show(100)
+
   visitorsByProduct.write.mode(SaveMode.Overwrite)
-                         .csv("hdfs://quickstart.cloudera/user/cloudera/spark_sql_101/ec/ouptut/visitors_by_product")
+                         .csv("hdfs://localhost/user/cloudera/spark_sql_101/ec/ouptut/visitors_by_product")
+
   activityByProduct.show(100)
   activityByProduct.write.mode(SaveMode.Overwrite)
-                         .csv("hdfs://quickstart.cloudera:/user/cloudera/spark_sql_101/ec/ouptut/activity_by_product")
+                         .csv("hdfs://localhost:/user/cloudera/spark_sql_101/ec/ouptut/activity_by_product")
 }

@@ -6,17 +6,18 @@ object SparkHiveExample extends App {
 
   val spark = SparkSession
     .builder()
-    .appName("Spark Hive Example")
+    .appName("Query Hive tables example")
     .enableHiveSupport()
     .getOrCreate()
 
-  import spark.sql
+  spark.sql("show tables").show()
 
   // Queries are expressed in HiveQL
-  sql("SELECT * FROM stocks").show()
+  spark.sql("SELECT * FROM stocks").show()
 
   // Aggregation queries are also supported.
-  sql("SELECT symbol, count(*) FROM stocks GROUP BY symbol").show()
-
-  spark.stop()
+  spark.sql("SELECT symbol, count(*) FROM stocks GROUP BY symbol").show()
 }
+
+
+
